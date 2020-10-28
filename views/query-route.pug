@@ -8,7 +8,7 @@ block breadcrumb
 		a(href='/') Home
 	li.breadcrumb-item Tools
 	li.breadcrumb-item Query Route
-	
+
 block content
 	h1.h3 Query Route
 
@@ -38,14 +38,14 @@ block content
 						div.input-group
 							input.form-control.form-control-lg.text-monospace(type="number" id="amount" name="amountSat" value=amountSat)
 							div.input-group-append
-								div.input-group-text.text-monospace sat
+								div.input-group-text.text-monospace gro
 
 			button.btn.btn-primary(type="submit")
 				i.fas.fa-route.mr-2
 				span Query Route
 
-		
-			
+
+
 		if (queryRouteError)
 			hr.my-3
 
@@ -92,7 +92,7 @@ block content
 									- var currencyValue = new Decimal(route.total_fees_msat).dividedBy(coinConfig.currencyUnitsByName.msat.multiplier);
 									- var tempCurrencyFormatType = "msat";
 									include includes/value-display.pug
-									
+
 							else
 								span.text-success 0
 
@@ -114,12 +114,12 @@ block content
 									span Origin
 							div.card-body
 								div.font-weight-bold.mb-2 Node
-								
+
 								- var card_node_pubkey = lndRpc.internal_pubkey;
 								include includes/node-card.pug
 
 						each hop, hopIndex in route.hops
-							
+
 							div.card.text-body.shadow-sm.float-left.mr-3
 								div.card-header
 									h3.h6.mb-0
@@ -132,17 +132,17 @@ block content
 
 										if (hopIndex == (route.hops.length - 1))
 											span  (Destination)
-									
+
 								div.card-body
 									div.mb-3.border-bottom.pb-3
 										div.font-weight-bold.mb-2 Node
 										- var card_node_pubkey = hop.pub_key;
 										include includes/node-card.pug
-										
+
 
 									div.mb-2
 										div.font-weight-bold Channel
-										
+
 										a.text-monospace(href=`/channel/${hop.chan_id}`)
 											- var channel_id = hop.chan_id;
 											include includes/channel-id.pug
@@ -152,7 +152,7 @@ block content
 
 									div
 										div.font-weight-bold Fees
-										
+
 										if (parseInt(hop.fee_msat) > 0)
 											span.text-danger.text-monospace +
 												- var currencyValue = new Decimal(hop.fee_msat).dividedBy(coinConfig.currencyUnitsByName.msat.multiplier);

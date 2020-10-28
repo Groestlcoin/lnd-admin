@@ -25,7 +25,7 @@ block content
 
 				if (openChannelError.details)
 					div.mb-2 #{openChannelError.details.substring(0, 1).toUpperCase()}#{openChannelError.details.substring(1)}
-					
+
 					if (openChannelError.code)
 						div Error code: #{openChannelError.code}
 
@@ -38,7 +38,7 @@ block content
 				h4.h6 Success
 
 				if (openChannelResponse.funding_txid_hex)
-					span New channel opening via transaction output: 
+					span New channel opening via transaction output:
 						span.text-monospace
 							if (config.blockExplorerUrl)
 								a(href=`${config.blockExplorerUrl}/tx/${openChannelResponse.funding_txid_hex}`)
@@ -53,12 +53,12 @@ block content
 								span  [#{openChannelResponse.output_index.toLocaleString()}]
 
 					div.mt-2
-						span See your 
+						span See your
 						a(href="/local-channels?sort=capacity-desc&status=Pending&localbalance=all&remotebalance=all&limit=20") pending channels
 						span  for details.
 
 				else
-					span New channel opening. See your 
+					span New channel opening. See your
 					a(href="/local-channels?sort=capacity-desc&status=Pending&localbalance=all&remotebalance=all&limit=20") pending channels
 					span  for details.
 
@@ -86,10 +86,10 @@ block content
 						div.input-group
 							input.form-control.form-control-lg.text-monospace(id="local_balance" name="local_balance" value=local_balance)
 							div.input-group-append
-								div.input-group-text.text-monospace sat
+								div.input-group-text.text-monospace gro
 
-						span.form-text.text-muted ~ 
-							span(id="local_balance_note") #{new Decimal(local_balance || 0).dividedBy(coinConfig.baseCurrencyUnit.multiplier).times(global.exchangeRates.usd).toDP(2)} 
+						span.form-text.text-muted ~
+							span(id="local_balance_note") #{new Decimal(local_balance || 0).dividedBy(coinConfig.baseCurrencyUnit.multiplier).times(global.exchangeRates.usd).toDP(2)}
 							small  USD
 
 				div.col-sm-6.col-md-4.col-lg-3.col-xl-2
@@ -99,10 +99,10 @@ block content
 						div.input-group
 							input.form-control.form-control-lg.text-monospace(id="remote_balance" name="remote_balance" value=remote_balance placeholder="0")
 							div.input-group-append
-								div.input-group-text.text-monospace sat
+								div.input-group-text.text-monospace gro
 
-						span.form-text.text-muted ~ 
-							span(id="remote_balance_note") #{new Decimal(remote_balance || 0).dividedBy(coinConfig.baseCurrencyUnit.multiplier).times(global.exchangeRates.usd).toDP(2)} 
+						span.form-text.text-muted ~
+							span(id="remote_balance_note") #{new Decimal(remote_balance || 0).dividedBy(coinConfig.baseCurrencyUnit.multiplier).times(global.exchangeRates.usd).toDP(2)}
 							small  USD
 
 			div.form-group.mt-2.mb-4

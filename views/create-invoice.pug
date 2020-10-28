@@ -8,7 +8,7 @@ block breadcrumb
 		a(href='/') Home
 	li.breadcrumb-item Tools
 	li.breadcrumb-item Create Invoice
-	
+
 block content
 	h1.h3 Create Invoice
 	hr
@@ -38,7 +38,7 @@ block content
 				span.font-weight-bold Hash (base64)
 				br
 				span.text-monospace #{createInvoiceResponse.r_hash_base64}
-			
+
 			if (false)
 				pre
 					code.json.bg-light #{JSON.stringify(createInvoiceResponse, null, 4)}
@@ -61,7 +61,7 @@ block content
 						div.input-group
 							input.form-control.form-control-lg.text-monospace(type="number" id="amount" name="amount")
 							div.input-group-append
-								div.input-group-text.text-monospace sat
+								div.input-group-text.text-monospace gro
 
 				div.col-md-2
 					div.form-group
@@ -74,5 +74,3 @@ block content
 			button.btn.btn-primary(type="submit")
 				i.fas.fa-asterisk.mr-2
 				span Create Invoice
-
-			
