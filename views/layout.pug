@@ -3,17 +3,17 @@ html
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no")
-		
+
 		if (session.uiTheme && session.uiTheme == "dark")
 			link(rel="stylesheet", href="/css/bootstrap-dark.css")
 			link(rel="stylesheet", href="/css/dark-touchups.css")
 
 		else
 			link(rel="stylesheet", href="/css/bootstrap.min.css", integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk")
-		
+
 		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Ubuntu:400,700")
 		link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css")
-		
+
 		link(rel='stylesheet', href='/css/dashboard.css')
 		link(rel='stylesheet', href='/css/styling.css')
 
@@ -21,27 +21,27 @@ html
 
 		block headContent
 			title #{config.siteInfo.title}
-		
+
 	body
 		nav(class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow")
 			//div(class="xcontainer")
 			a(class="navbar-brand col-sm-3 col-md-1 mr-0", href="/")
 				img(src="/img/logo/lightning.svg", class="header-image")
 				span #{config.siteInfo.title}
-				
+
 			if (client)
 				if (false)
 					ul(class="navbar-nav mr-auto")
 						if (config.headerDropdownLinks)
 							li(class="nav-item dropdown")
-								a(class="nav-link dropdown-toggle", href="javascript:void(0)", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") 
+								a(class="nav-link dropdown-toggle", href="javascript:void(0)", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
 									span  #{config.headerDropdownLinks.title}
 								div(class="dropdown-menu", aria-label=(config.headerDropdownLinks.title + " Items"))
 									each item in config.headerDropdownLinks.links
 										a(class="dropdown-item", href=item.url)
 											img(src=item.imgUrl, style="width: 24px; height: 24px; margin-right: 8px;", alt=item.name)
 											span  #{item.name}
-				
+
 
 				form(method="get", action="/search", class="form-inline mr-3")
 					div(class="input-group input-group-sm")
@@ -52,7 +52,7 @@ html
 
 				ul(class="navbar-nav")
 					li(class="nav-item dropdown")
-						a(class="nav-link dropdown-toggle", href="javascript:void(0)", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") 
+						a(class="nav-link dropdown-toggle", href="javascript:void(0)", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
 							i(class="fas fa-cog mr-1")
 						div(class="dropdown-menu", aria-labelledby="navbarDropdown")
 							if (coinConfig.currencyUnits)
@@ -75,12 +75,12 @@ html
 								span  Dark
 
 					li(class="nav-item dropdown")
-						a(class="nav-link dropdown-toggle", href="javascript:void(0)", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") 
+						a(class="nav-link dropdown-toggle", href="javascript:void(0)", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
 							if (session.admin)
-								i(class="fas fa-user mr-1") 
+								i(class="fas fa-user mr-1")
 								span  Admin
 							else
-								i(class="far fa-user mr-1") 
+								i(class="far fa-user mr-1")
 								span  Guest
 
 						div(class="dropdown-menu", aria-labelledby="navbarDropdown")
@@ -91,7 +91,7 @@ html
 								a(class="dropdown-item", href="/login")
 									span  Login
 
-				
+
 		div(class="container-fluid")
 			div(class="row")
 				nav(class="col-md-1 d-none d-md-block bg-light sidebar")
@@ -116,7 +116,7 @@ html
 					else if (session.userMessage)
 						div(class="alert shadow-sm", class=(session.userMessageType ? ("alert-"  + session.userMessageType) : "alert-info"), role="alert")
 							span !{session.userMessage}
-					
+
 					block content
 
 			footer(class="footer bg-dark text-light pt-3 pb-1 px-3 mr-n4", style="margin-top: 50px;")
@@ -137,9 +137,9 @@ html
 									dt Public Demo
 									dd
 										a(href=config.siteInfo.demoSiteUrl) #{config.siteInfo.demoSiteUrl}
-										
+
 										div(class="mt-2")
-											- var demoSiteCoins = ["BTC", "LTC"];
+											- var demoSiteCoins = ["GRS];
 											each demoSiteCoin in demoSiteCoins
 												a(href=coinConfigs[demoSiteCoin].demoSiteUrl, class="mr-2")
 													img(src=("/img/logo/" + demoSiteCoin.toLowerCase() + ".svg"))
@@ -157,12 +157,12 @@ html
 												img(src=donationAddressQrCodeUrls[coin], alt=config.donationAddresses[coin].address, style="border: solid 1px #ccc;")
 												br
 												if (config.donationAddresses[coin].urlPrefix)
-													span #{coin}: 
+													span #{coin}:
 													a(href=(config.donationAddresses[coin].urlPrefix + config.donationAddresses[coin].address)) #{config.donationAddresses[coin].address.substring(0, 10)}...
 												else
 													span #{coin}
-				
-		
+
+
 		script(src="/js/jquery.min.js", integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh")
 		script(src="/js/popper.min.js", integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js", integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb", crossorigin="anonymous")
@@ -172,16 +172,16 @@ html
 		script(type="text/javascript", src="https://cdn.jsdelivr.net/npm/jdenticon@2.1.1")
 
 		script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js")
-		
+
 		script(src="https://cdn.ravenjs.com/3.22.4/raven.min.js", crossorigin="anonymous")
 		script.
 			Raven.config('https://0bf20e8357a748cab8aa9d35c0f790dd@sentry.io/130800').install();
-			
+
 			$(document).ready(function() {
 				$('[data-toggle="tooltip"]').tooltip();
 				$('[data-toggle="popover"]').popover({html:true});
 			});
 
 			hljs.initHighlightingOnLoad();
-		
+
 		block endOfBody

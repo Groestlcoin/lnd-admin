@@ -23,7 +23,7 @@ aside.aside-menu.p-3.bg-main.text-body
 	div.mb-3
 		h5.h6 Currency Format
 		div.btn-group.mr-2(role="group")
-			each currencyId in ["sat", "BTC"]
+			each currencyId in ["gro", "GRS"]
 				- var currencyUnit = coinConfig.currencyUnitsByName[currencyId];
 				if (currencyUnit.type == "native" || config.queryExchangeRates)
 					- var currencySelected = false;
@@ -92,8 +92,8 @@ aside.aside-menu.p-3.bg-main.text-body
 			div.mb-2
 				span.mr-2 Commit
 				span
-					a.text-monospace(href=`https://github.com/janoside/lnd-admin/commit/${sourcecodeVersion}`) ##{sourcecodeVersion.substring(0, 8)}
-		
+					a.text-monospace(href=`https://github.com/groestlcoin/lnd-admin/commit/${sourcecodeVersion}`) ##{sourcecodeVersion.substring(0, 8)}
+
 		if (global.sourcecodeDate)
 			- var timeAgo = moment.duration(moment.utc(new Date()).diff(global.sourcecodeDate));
 			- var dateTimeUtc = moment.utc(global.sourcecodeDate).format("Y-MM-DD");
@@ -101,7 +101,7 @@ aside.aside-menu.p-3.bg-main.text-body
 			div.mb-2
 				span.mr-2 Date
 				span.text-monospace.border-dotted(title=`${timeAgo.humanize()} ago` data-toggle="tooltip") #{dateTimeUtc}
-				
+
 		if (global.appVersion)
 			div.mb-2
 				span.mr-2 Version
@@ -130,7 +130,7 @@ aside.aside-menu.p-3.bg-main.text-body
 						small.text-muted
 							i.icon-location-pin
 							| &#x9;Palo Alto, CA
-			
+
 			#settings.tab-pane.p-3(role='tabpanel')
 				h6 Settings
 				.aside-options
@@ -167,4 +167,3 @@ aside.aside-menu.p-3.bg-main.text-body
 						label.switch.switch-label.switch-pill.switch-success.switch-sm.float-right
 							input.switch-input(type='checkbox' checked='')
 							span.switch-slider(data-checked='On' data-unchecked='Off')
-				

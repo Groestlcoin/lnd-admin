@@ -11,30 +11,30 @@ block content
 		if (session.hideHomepageBanner != "true")
 			if (global.newAppVersion)
 				div.alert.alert-primary.alert-dismissible.shadow-sm.mb-3
-					span You're running LND Admin v#{global.appVersion}. A newer version is available: 
+					span You're running LND Admin v#{global.appVersion}. A newer version is available:
 					a(href="https://www.npmjs.com/package/lnd-admin") LND Admin v#{global.newAppVersion}
 
 			div.alert.alert-primary.alert-dismissible.shadow-sm.mb-3(role="alert")
 				p
 					span.font-weight-bold LND Admin
-					span  is 
-					a(href="https://github.com/janoside/lnd-admin" target="_blank") open-source
-					span  and easy to set up. It communicates with your 
-					a(href="https://github.com/lightningnetwork/lnd" target="_blank") LND
-					span  node via gRPC. See the 
-					a(href="https://github.com/janoside/lnd-admin" target="_blank") project description
+					span  is
+					a(href="https://github.com/groestlcoin/lnd-admin" target="_blank") open-source
+					span  and easy to set up. It communicates with your
+					a(href="https://github.com/groestlcoin/lnd" target="_blank") LND
+					span  node via gRPC. See the
+					a(href="https://github.com/groestlcoin/lnd-admin" target="_blank") project description
 					span  for a list of features and instructions for running.
 
 				if (global.sourcecodeProjectMetadata)
 					div.mt-2.mb-2
-						a.btn.btn-primary.mr-3.mb-1(href="https://github.com/janoside/lnd-admin")
+						a.btn.btn-primary.mr-3.mb-1(href="https://github.com/groestlcoin/lnd-admin")
 							i.fas.fa-star.mr-2
-							span.mr-2 Star 
+							span.mr-2 Star
 							span.badge.bg-white.text-dark #{global.sourcecodeProjectMetadata.stargazers_count}
 
-						a.btn.btn-primary.mr-3.mb-1(href="https://github.com/janoside/lnd-admin/fork")
+						a.btn.btn-primary.mr-3.mb-1(href="https://github.com/groestlcoin/lnd-admin/fork")
 							i.fas.fa-code-branch.mr-2
-							span.mr-2 Fork 
+							span.mr-2 Fork
 							span.badge.bg-white.text-dark #{global.sourcecodeProjectMetadata.forks_count}
 
 						a.btn.btn-primary.btn.btn-primary.mb-1(href=config.donations.btcpayserver.host target="_blank")
@@ -51,8 +51,8 @@ block content
 
 				a.close(href="/changeSetting?name=hideHomepageBanner&value=true" aria-label="Close" style="text-decoration: none;")
 					span(aria-hidden="true") &times;
-				
-		
+
+
 		- var totalCapacity = 0;
 		each item in fullNetworkDescription.channels.sortedByLastUpdate
 			- totalCapacity = totalCapacity + parseInt(item.capacity);
@@ -184,7 +184,7 @@ block content
 													span #{parseInt(getInfo.num_pending_channels).toLocaleString()} pending
 
 													if (getInfo.num_inactive_channels > 0)
-														span , 
+														span ,
 
 												if (getInfo.num_inactive_channels > 0)
 													span #{parseInt(getInfo.num_inactive_channels).toLocaleString()} inactive
@@ -197,7 +197,7 @@ block content
 								div.summary-split-table-label Channel Balance
 								div.summary-split-table-content
 									div.clearfix
-										
+
 										div.float-left(style="width: 8rem;")
 											div.font-weight-bold Local
 
@@ -208,7 +208,7 @@ block content
 													- var localBalancePercent = new Decimal(totalLocalBalance).dividedBy(totalLocalBalance + totalRemoteBalance).times(100);
 
 												include includes/value-display.pug
-												
+
 												if (currencyValue > 0)
 													div.text-muted #{localBalancePercent.toDP(1)}%
 
@@ -222,7 +222,7 @@ block content
 													- var remoteBalancePercent = new Decimal(totalRemoteBalance).dividedBy(totalLocalBalance + totalRemoteBalance).times(100);
 
 												include includes/value-display.pug
-												
+
 												if (currencyValue > 0)
 													div.text-muted #{remoteBalancePercent.toDP(1)}%
 
@@ -303,7 +303,7 @@ block content
 				div.card-header
 					div(class="row")
 						div(class="col")
-							h2.h6.mb-0 #{fullNetworkDescription.nodes.sortedByLastUpdate.length.toLocaleString()} 
+							h2.h6.mb-0 #{fullNetworkDescription.nodes.sortedByLastUpdate.length.toLocaleString()}
 								if (fullNetworkDescription.nodes.sortedByLastUpdate.length == 1)
 									span Node
 								else
@@ -330,14 +330,14 @@ block content
 							h3.h4 Top Capacity
 							- var nodeInfos = fullNetworkDescription.nodes.sortedByTotalCapacity.slice(0, 5);
 							include includes/node-card-list.pug
-				
+
 
 		if (false)
 			div(class="card mb-4 shadow-sm")
 				div.card-header
 					div(class="row")
 						div(class="col")
-							h2.h6.mb-0 #{fullNetworkDescription.channels.sortedByLastUpdate.length.toLocaleString()} 
+							h2.h6.mb-0 #{fullNetworkDescription.channels.sortedByLastUpdate.length.toLocaleString()}
 								if (fullNetworkDescription.channels.sortedByLastUpdate.length == 1)
 									span Channel
 								else

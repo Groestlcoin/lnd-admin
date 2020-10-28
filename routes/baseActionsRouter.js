@@ -28,7 +28,7 @@ router.get("/", function(req, res) {
 			}
 
 			res.locals.getInfo = response;
-			
+
 			resolve();
 		});
 	}));
@@ -38,10 +38,10 @@ router.get("/", function(req, res) {
 			res.locals.networkInfo = networkInfoResponse;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("234r078sdh907gsdgs", err));
-			
+
 			reject(err);
 		});
 	}));
@@ -52,7 +52,7 @@ router.get("/", function(req, res) {
 
 			var totalLocalBalance = 0;
 			var totalRemoteBalance = 0;
-			
+
 			localChannelsResponse.channels.forEach(function(chan) {
 				totalLocalBalance += parseInt(chan.local_balance);
 				totalRemoteBalance += parseInt(chan.remote_balance);
@@ -62,10 +62,10 @@ router.get("/", function(req, res) {
 			res.locals.totalRemoteBalance = totalRemoteBalance;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("325078whs0d7hg8s", err));
-			
+
 			reject(err);
 		});
 	}));
@@ -75,10 +75,10 @@ router.get("/", function(req, res) {
 			res.locals.walletBalance = walletBalanceResponse;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("23r079uhsd0gsh", err));
-			
+
 			reject(err);
 		});
 	}));
@@ -158,7 +158,7 @@ router.get("/node/:nodePubkey", function(req, res) {
 
 				}).catch(function(err) {
 					res.locals.pageErrors.push(utils.logError("3e0ufhdhfsdss", err));
-					
+
 					resolve();
 				});
 			} else {
@@ -177,7 +177,7 @@ router.get("/node/:nodePubkey", function(req, res) {
 
 	}).catch(function(err) {
 		res.locals.pageErrors.push(utils.logError("230rhsd0gds", err));
-		
+
 		res.render("node");
 	});
 });
@@ -244,7 +244,7 @@ router.get("/channel/:channelId", function(req, res) {
 			reject(err);
 		});
 	}));
-	
+
 
 	Promise.all(promises.map(utils.reflectPromise)).then(function() {
 		if (res.locals.channel != null) {
@@ -397,7 +397,7 @@ router.get("/wallet", function(req, res) {
 			res.locals.localChannels = localChannels;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("2307rwehdsgds", err));
 
@@ -410,7 +410,7 @@ router.get("/wallet", function(req, res) {
 			res.locals.closedChannels = closedChannels;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("3r07wgshsgs", err));
 
@@ -423,7 +423,7 @@ router.get("/wallet", function(req, res) {
 			res.locals.walletUtxosResponse = walletUtxosResponse;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("32078sdhsghgsh", err));
 
@@ -436,7 +436,7 @@ router.get("/wallet", function(req, res) {
 			res.locals.onChainTransactions = onChainTransactionsResponse;
 
 			resolve();
-		
+
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("213e087hy07sgdh", err));
 
@@ -530,7 +530,7 @@ router.get("/peers", function(req, res) {
 	var limit = config.site.pageSizes.peers;
 	var offset = 0;
 	var sort = "pubkey-asc";
-	
+
 	if (req.query.limit) {
 		limit = parseInt(req.query.limit);
 	}
@@ -681,7 +681,7 @@ router.post("/login", function(req, res) {
 	}
 
 	var pwdHash = hashjs.sha256().update(req.body.password).digest('hex');
-	
+
 	if (pwdHash == global.adminCredentials.adminPasswordSha256) {
 		var connectToLndNeeded = true;
 		if (global.adminPassword) {
@@ -865,7 +865,7 @@ router.get("/forwarding-history", function(req, res) {
 			}
 		}
 	}
-	
+
 
 	var promises = [];
 
@@ -958,7 +958,7 @@ router.get("/forwarding-history", function(req, res) {
 
 		var totalFees = 0;
 		var totalValueTransferred = 0;
-		
+
 		var maxFee = 0;
 		var maxValueTransferred = 0;
 
@@ -1076,7 +1076,7 @@ router.get("/forwarding-history", function(req, res) {
 
 		res.render("forwarding-history");
 	});
-	
+
 });
 
 router.get("/logout", function(req, res) {
@@ -1167,7 +1167,7 @@ router.get("/nodes", function(req, res) {
 			res.locals.fullNetworkDescription = fnd;
 
 			var allNodes = fnd.nodes.sortedByLastUpdate;
-			
+
 			if (sortProperty == "last_update") {
 				allNodes = fnd.nodes.sortedByLastUpdate;
 
@@ -1293,22 +1293,22 @@ router.get("/channels", function(req, res) {
 			res.locals.fullNetworkDescription = fnd;
 
 			var allChannels = fnd.channels.sortedByLastUpdate;
-			
+
 
 			if (sortProperty == "last_update") {
 				allChannels = fnd.channels.sortedByLastUpdate;
 
 			} else if (sortProperty == "capacity") {
 				allChannels = fnd.channels.sortedByCapacity;
-			
+
 			} else if (sort == "openblockheight-desc") {
 				allChannels = fnd.channels.sortedByOpenBlockHeight;
-				
+
 			} else {
 				allChannels = fnd.channels.sortedByLastUpdate;
 			}
 
-			
+
 
 
 			var predicates = [
@@ -1397,7 +1397,7 @@ router.get("/local-channels", function(req, res) {
 	if (req.query.sort) {
 		sort = req.query.sort;
 	}
-	
+
 	if (req.query.open) {
 		open = req.query.open.toLowerCase();
 	}
@@ -1477,7 +1477,7 @@ router.get("/local-channels", function(req, res) {
 
 	Promise.all(promises.map(utils.reflectPromise)).then(function() {
 		var allChannels = [];
-		
+
 		res.locals.localChannels.channels.forEach(function(chan) {
 			allChannels.push(chan);
 		});
@@ -1628,7 +1628,7 @@ router.get("/local-channels", function(req, res) {
 
 				if (diff == 0) {
 					return fallback;
-					
+
 				} else {
 					return diff;
 				}
@@ -1639,7 +1639,7 @@ router.get("/local-channels", function(req, res) {
 
 				if (diff == 0) {
 					return fallback;
-					
+
 				} else {
 					return diff;
 				}
@@ -1650,7 +1650,7 @@ router.get("/local-channels", function(req, res) {
 
 				if (diff == 0) {
 					return fallback;
-					
+
 				} else {
 					return diff;
 				}
@@ -1695,7 +1695,7 @@ router.get("/local-channels", function(req, res) {
 
 		res.locals.allChannels = allChannels;
 		res.locals.allFilteredChannels = allFilteredChannels;
-		
+
 		res.locals.pagedFilteredChannels = [];
 		res.locals.parsedChannelIds = {};
 
@@ -1939,7 +1939,7 @@ router.post("/manage-nodes", function(req, res) {
 		var lndconnectString = req.body.lndconnectString;
 
 		userFormParams.lndconnectString = lndconnectString;
-		
+
 		if (!lndconnectString) {
 			for (var prop in userFormParams) {
 				if (userFormParams.hasOwnProperty(prop)) {
@@ -2108,7 +2108,7 @@ router.get("/payment-history", function(req, res) {
 	var offset = 0;
 	var sort = "date-desc";
 	var date = "all";
-	
+
 	if (req.query.limit) {
 		limit = parseInt(req.query.limit);
 	}
@@ -2199,7 +2199,7 @@ router.get("/payment-history", function(req, res) {
 		for (var i = offset; i < Math.min(offset + limit, allFilteredPayments.length); i++) {
 			pagedFilteredPayments.push(allFilteredPayments[i]);
 		}
-		
+
 		res.locals.listPaymentsResponse = listPaymentsResponse;
 
 		res.locals.allPayments = listPaymentsResponse.payments;
@@ -2407,7 +2407,7 @@ router.get("/invoices", function(req, res) {
 	var sort = "created-desc";
 	var settled = "all";
 	var created = "all";
-	
+
 	if (req.query.limit) {
 		limit = parseInt(req.query.limit);
 	}
@@ -2535,7 +2535,7 @@ router.get("/invoices", function(req, res) {
 		}
 
 		res.locals.invoices = invoices;
-		
+
 		res.locals.filteredCount = filteredCount;
 
 		res.locals.allInvoices = invoicesResponse.invoices;
@@ -2543,7 +2543,7 @@ router.get("/invoices", function(req, res) {
 		res.locals.pagedFilteredInvoices = pagedFilteredInvoices;
 
 		res.locals.invoiceCount = invoicesResponse.invoices.length;
-		
+
 		res.render("invoices");
 
 	}).catch(function(err) {
@@ -2558,7 +2558,7 @@ router.get("/invoices", function(req, res) {
 router.get("/openchannel", function(req, res) {
 	res.locals.pubkey = req.query.pubkey;
 	res.locals.visibility = "public";
-	
+
 	res.render("openchannel");
 });
 
@@ -2567,7 +2567,7 @@ router.post("/openchannel", function(req, res) {
 	var local_balance = 0;
 	var remote_balance = 0;
 	var visibility = "public";
-	
+
 	if (req.body.local_balance) {
 		local_balance = parseInt(req.body.local_balance);
 	}
@@ -2734,7 +2734,7 @@ router.get("/edit-multi-channel-policies", function(req, res) {
 			reject(err);
 		});
 	}));
-	
+
 
 	Promise.all(promises.map(utils.reflectPromise)).then(function() {
 		if (localChannels) {
@@ -2763,7 +2763,7 @@ router.post("/edit-multi-channel-policies", function(req, res) {
 
 	if (tab == "all") {
 		if (!req.body.baseFeeMsat) {
-			req.session.userMessage = "Missing required parameter: Base Fee (msat)";
+			req.session.userMessage = "Missing required parameter: Base Fee (mgro)";
 			req.session.userMessageType = "warning";
 
 			res.redirect(`/edit-multi-channel-policies?tab=${tab}`);
@@ -2887,7 +2887,7 @@ router.get("/error-log", function(req, res) {
 		res.locals.errorLog = global.errorLog.slice();
 		res.locals.errorLog.reverse();
 	}
-	
+
 	res.render("error-log");
 });
 
@@ -2921,7 +2921,7 @@ router.post("/withdraw-funds", function(req, res) {
 
 		}).catch(function(err) {
 			res.locals.pageErrors.push(utils.logError("2397rgsughse", err));
-			
+
 			res.json(err);
 		});
 	} else if (withdrawType == "multi") {
@@ -3012,8 +3012,8 @@ router.get("/tag", function(req, res) {
 	global.userPreferences = preferences;
 
 	utils.savePreferences(global.userPreferences, global.adminPassword);
-	
-	
+
+
 	res.redirect(req.headers.referer);
 });
 

@@ -66,7 +66,7 @@ app.set('views', path.join(__dirname, 'views'));
 // ref: https://blog.stigok.com/post/disable-pug-debug-output-with-expressjs-web-app
 app.engine('pug', (path, options, fn) => {
 	options.debug = false;
-	
+
 	return pug.__express.call(null, path, options, fn);
 });
 
@@ -90,7 +90,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 function getSourcecodeProjectMetadata() {
 	var options = {
-		url: "https://api.github.com/repos/janoside/lnd-admin",
+		url: "https://api.github.com/repos/groestlcoin/lnd-admin",
 		headers: {
 			'User-Agent': 'request'
 		}
@@ -159,7 +159,7 @@ app.runOnStartup = function() {
 			global.sourcecodeDate = moment.utc(log.all[0].date, "YYYY-MM-DD HH:mm:ss Z");
 		});
 	}
-	
+
 	getSourcecodeProjectMetadata();
 	setInterval(getSourcecodeProjectMetadata, 3 * 3600000);
 
@@ -218,18 +218,18 @@ app.use(function(req, res, next) {
 		if (global.adminPassword != null) {
 			if (!req.path.startsWith("/manage-nodes")) {
 				res.redirect("/manage-nodes?setup=true");
-				
+
 				return;
 			}
 		} else if (!req.path.startsWith("/setup")) {
 			res.redirect("/setup");
-			
+
 			return;
 		}
 	} else if (!global.adminPassword) {
 		if (!req.path.startsWith("/login")) {
 			res.redirect("/login");
-			
+
 			return;
 		}
 	}
@@ -256,7 +256,7 @@ app.use(function(req, res, next) {
 			res.locals.crawlerBot = true;
 		}
 	}
-	
+
 
 	var userSettings = [
 		{name:"currencyFormatType", default:"sat"},
@@ -279,13 +279,13 @@ app.use(function(req, res, next) {
 		res.locals[userSetting.name] = req.session[userSetting.name];
 	});
 
-	
+
 	if (req.session.userMessage) {
 		res.locals.userMessage = req.session.userMessage;
-		
+
 		if (req.session.userMessageType) {
 			res.locals.userMessageType = req.session.userMessageType;
-			
+
 		} else {
 			res.locals.userMessageType = "warning";
 		}
